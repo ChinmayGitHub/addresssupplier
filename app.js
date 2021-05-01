@@ -6,11 +6,10 @@ var app = express();
 const mysql = require('mysql2');
  
 // create the connection to database
-const connection = mysql.createConnection({
+var connection = mysql.createConnection({
   host: 'mysql',
   user: 'root',
-  password: 'root123',
-  database: 'nodeDB'
+  password: 'root123'
 });
 
 app.get('/', function (req, res) {
@@ -19,23 +18,26 @@ app.get('/', function (req, res) {
 
 app.get('/addAddress', function (req, res) {
 
-let tempConn = mysql.createConnection({host:'mysql',user:'root',password:'root123'});
-
-  tempConn.query('CREATE DATABASE `nodeDB`', (err,rows) => {
+  connection.query('CREATE DATABASE `nodeDB`', (err,rows) => {
    if(err) throw err;
    console.log("database created");
 
-    connection.query('CREATE TABLE IF NOT EXISTS `emp_address_data` (`id` INT AUTO_INCREMENT PRIMARY KEY, `address` VARCHAR(255))', (err,rows) => {
+    connection.changeUser({database : 'nodeDB'}, function(err) {
      if(err) throw err;
-     console.log("table created");
+     console.log("database used");
 
-       connection.query('REPLACE INTO `emp_address_data` (`id`,`address`) values (1,"Pune")', (err,rows) => {
+      connection.query('CREATE TABLE IF NOT EXISTS `emp_address_data` (`id` INT AUTO_INCREMENT PRIMARY KEY, `address` VARCHAR(255))', (err,rows) => {
        if(err) throw err;
-       console.log("address added");
-       res.send("address added");
+       console.log("table created");
+
+         connection.query('REPLACE INTO `emp_address_data` (`id`,`address`) values (1,"Pune")', (err,rows) => {
+          if(err) throw err;
+          console.log("address added");
+          res.send("address added");
+         }); 
        }); 
-    }); 
-  }); 
+     });
+   }); 
 });
 
 app.get('/getAddress', function (req, res) {
