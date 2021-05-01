@@ -1,0 +1,16 @@
+{
+  "name": "addresssupplier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@instana/collector": "^1.119.1",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5"
+  }
+}
