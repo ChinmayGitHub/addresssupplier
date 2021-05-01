@@ -41,10 +41,16 @@ app.get('/addAddress', function (req, res) {
 });
 
 app.get('/getAddress', function (req, res) {
-  connection.query('SELECT `address` FROM `emp_address_data` WHERE `id` = 1', (err,rows) => {
+
+  connection.changeUser({database : 'nodeDB'}, function(err) {
    if(err) throw err;
-   console.log(rows);
-   res.send(rows[0]);
+   console.log("database used");
+   
+    connection.query('SELECT `address` FROM `emp_address_data` WHERE `id` = 1', (err,rows) => {
+     if(err) throw err;
+     console.log(rows);
+     res.send(rows[0]);
+    }); 
   }); 
 });
 
