@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 
 app.get('/addAddress', function (req, res) {
 
-  connection.query('CREATE DATABASE `nodeDB`;USE `nodeDB`', (err,rows) => {
+  connection.query('CREATE DATABASE `nodeDB`;USE nodeDB', (err,rows) => {
    if(err) throw err;
    console.log("database created");
 
