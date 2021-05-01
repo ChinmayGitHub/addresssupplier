@@ -41,7 +41,7 @@ app.get('/addAddress', function (req, res) {
 });
 
 app.get('/getAddress', function (req, res) {
-  connection.query('SELECT `address` FROM `emp_address2` WHERE `id` = 1', (err,rows) => {
+  connection.query('SELECT `address` FROM `emp_address_data` WHERE `id` = 1', (err,rows) => {
    if(err) throw err;
    console.log(rows);
    res.send(rows[0]);
