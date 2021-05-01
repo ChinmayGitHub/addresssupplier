@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  res.send('Hello World !');
 });
 
 app.get('/addAddress', function (req, res) {
