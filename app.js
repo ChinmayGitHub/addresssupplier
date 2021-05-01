@@ -9,7 +9,8 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
   host: 'mysql',
   user: 'root',
-  password: 'root123'
+  password: 'root123',
+  database: 'nodeDB'
 });
 
 app.get('/', function (req, res) {
@@ -18,7 +19,9 @@ app.get('/', function (req, res) {
 
 app.get('/addAddress', function (req, res) {
 
-  connection.query('CREATE DATABASE `nodeDB`;USE nodeDB', (err,rows) => {
+let tempConn = mysql.createConnection({host:'mysql',user:'root',password:'root123'});
+
+  tempConn.query('CREATE DATABASE `nodeDB`', (err,rows) => {
    if(err) throw err;
    console.log("database created");
 
